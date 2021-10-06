@@ -7,6 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AccuweatherModel implements WeatherModel {
     //http://dataservice.accuweather.com/forecasts/v1/daily/1day/349727
@@ -26,7 +27,7 @@ public class AccuweatherModel implements WeatherModel {
     private static final OkHttpClient okHttpClient = new OkHttpClient();
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-//    private DataBaseRepository dataBaseRepository = new DataBaseRepository();
+    private DataBaseRepository dataBaseRepository = new DataBaseRepository();
 
     public void getWeather(String selectedCity, Period period) throws IOException {
         switch (period) {
@@ -94,10 +95,10 @@ public class AccuweatherModel implements WeatherModel {
         }
     }
 
-//    @Override
-//    public List<Weather> getSavedToDBWeather() {
-//        return dataBaseRepository.getSavedToDBWeather();
-//    }
+    @Override
+    public List<Weather> getSavedToDBWeather() {
+        return dataBaseRepository.getSavedToDBWeather();
+    }
 
     private String detectCityKey(String selectCity) throws IOException {
         //http://dataservice.accuweather.com/locations/v1/cities/autocomplete
